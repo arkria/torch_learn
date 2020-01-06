@@ -25,10 +25,10 @@ y = x.sin()+0.3*torch.rand(x.size())
 plt.scatter(x.data.numpy(), y.data.numpy())
 plt.show()
 
-batch_size = 50
+batch_size = 29
 
 torch_dataset = torch.utils.data.TensorDataset(x, y)
-train_db, val_db = torch.utils.data.random_split(torch_dataset, [100, 50])
+train_db, val_db = torch.utils.data.random_split(torch_dataset, [145, 5])
 train_loader = torch.utils.data.DataLoader(
 dataset=train_db, # torch TensorDataset format
 batch_size=batch_size, # mini batch size
@@ -51,12 +51,13 @@ criteon = nn.MSELoss()
 for epoch in range(100):
     for batch_idx, (x, y) in enumerate(train_loader):
         x = x.view(x.size(0), 1)
+        print("size:", len(x))
         out = net(x)
         loss = criteon(out, y)
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-        if batch_idx % 5 == 0:
+        if batch_idx % 1 == 0:
             print("epoch: {}, batch idx: {}, loss: {}".format(
             epoch, batch_idx, loss.item()))
             plt.cla()
