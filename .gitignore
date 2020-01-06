@@ -1,2 +1,5 @@
 .idea/
-*.tar.gz
+*.gz
+*.pt
+./cnn/cifar/
+./MINIST/mnist_data/
